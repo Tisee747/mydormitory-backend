@@ -3,5 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return 'MyDormitory backend is running!';
+    return response()->json([
+        'message' => 'MyDormitory API running'
+    ]);
 });
