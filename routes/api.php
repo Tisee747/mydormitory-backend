@@ -56,7 +56,7 @@ Route::put('/laporan/{id}', [LaporanMasalahController::class, 'update']);
 // NOTIFIKASI
 Route::get('/notifikasi/{user_id}', [NotifikasiController::class, 'index']);
 Route::put('/notifikasi/{id}/baca', [NotifikasiController::class, 'baca']);
-=======
+
 Route::get('/dorms', function () {
     // Ini hanya tes untuk memastikan rute-nya berfungsi
     return response()->json(['message' => 'Sukses! Rute /api/dorms terhubung.']);
