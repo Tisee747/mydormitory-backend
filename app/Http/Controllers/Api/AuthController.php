@@ -11,15 +11,28 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string'
+        ]);
+
         $user = User::where('email', $request->email)->first();
 
         if ($user && Hash::check($request->password, $user->password)) {
+            // Role sederhana: kalau ada relasi penghuni => penghuni, selain itu admin
+            $role = $user->penghuni ? 'penghuni' : 'admin';
+
             return response()->json([
                 'success' => true,
-                'user' => $user
+                'role' => $role,
+                'user' => $user,
+                'penghuni' => $user->penghuni
             ]);
         }
 
-        return response()->json(['success' => false], 401);
+        return response()->json([
+            'success' => false,
+            'message' => 'Email atau password salah'
+        ], 401);
     }
 }
